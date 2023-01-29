@@ -1,0 +1,2 @@
+class Earing < ApplicationRecord
+end

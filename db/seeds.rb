@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+users = User.create([{name: 'John', password: "heloMotto"}, {name: 'Ben', password: "reach4Sky"}])
+earings = Earing.create([{color: "gold", shape: "hoop"}, {color: "pearl", shape: "dangle"}])
+listings = Listing.create([{price: 50, user_id: User.first, earing_id: Earing.second}, {price: 75, user_id: User.second, earing_id: Earing.first}])

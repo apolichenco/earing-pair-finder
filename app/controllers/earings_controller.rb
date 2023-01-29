@@ -1,0 +1,2 @@
+class EaringsController < ApplicationController
+end
