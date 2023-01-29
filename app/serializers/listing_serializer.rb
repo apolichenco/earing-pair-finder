@@ -1,3 +1,6 @@
 class ListingSerializer < ActiveModel::Serializer
-  attributes :id, :price, :user_id, :earing_id
+  attributes :price
+
+  belongs_to :user
+  belongs_to :earing
 end

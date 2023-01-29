@@ -1,3 +1,3 @@
 class EaringSerializer < ActiveModel::Serializer
-  attributes :id, :color, :shape
+  attributes :color, :shape
 end

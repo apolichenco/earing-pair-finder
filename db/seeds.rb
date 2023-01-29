@@ -9,4 +9,4 @@
 
 users = User.create([{name: 'John', password: "heloMotto"}, {name: 'Ben', password: "reach4Sky"}])
 earings = Earing.create([{color: "gold", shape: "hoop"}, {color: "pearl", shape: "dangle"}])
-listings = Listing.create([{price: 50, user_id: User.first, earing_id: Earing.second}, {price: 75, user_id: User.second, earing_id: Earing.first}])
+listings = Listing.create([{price: 50, user_id: 1, earing_id: 2}, {price: 75, user_id: 2, earing_id: 1}])
