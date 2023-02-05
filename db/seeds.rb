@@ -7,6 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-users = User.create([{name: 'John', password: "heloMotto"}, {name: 'Ben', password: "reach4Sky"}])
+users = User.create([{name: 'John', password: "reach4Sky"}, {name: 'Ben', password: 'reach4Sky'}, {name: 'Benn', password: 'reach4Sky'}])
 earings = Earing.create([{color: "gold", shape: "hoop"}, {color: "pearl", shape: "dangle"}])
 listings = Listing.create([{price: 50, user_id: 1, earing_id: 2}, {price: 75, user_id: 2, earing_id: 1}])
