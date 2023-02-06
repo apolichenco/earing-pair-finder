@@ -1,28 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
 import React, {useState, useEffect} from 'react';
 import { Route, Switch } from "react-router-dom"
 import Header from './Header'
 import LogIn from './LogIn'
 import Listings from './Listings'
+import Favorites from './Favorites'
 
 function App() {
+
+  const [logInStatus, setLogInStatus] = useState("Sign Up")
+  const [allData, setAllData] = useState([])
+
+      useEffect (() => {
+        fetch("http://localhost:3000")
+        .then((r) => r.json())
+        .then((data) => setAllData(data))
+      }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header status={logInStatus}/>
+      <Switch>
+        <Route path="/log_in">
+          <LogIn status={logInStatus} setStatus={setLogInStatus}/>
+        </Route>
+        <Route path="/listings">
+          <Listings listingData={allData}/>
+        </Route>
+        <Route path="/favs">
+          <Favorites/>
+        </Route>
+      </Switch>
     </div>
   );
 }

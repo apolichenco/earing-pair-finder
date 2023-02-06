@@ -1,6 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 function Listings() {
+
+    const [allData, setAllData] = useState([])
+
+    // useEffect (() => {
+    //     fetch
+    //   }, [])
 
     return (
         <div>

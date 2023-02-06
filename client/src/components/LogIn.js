@@ -1,6 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 function LogIn() {
+
+    // const [logInStatus, setLogInStatus] = useState("Sign Up")
+
 
     return (
         <div>
