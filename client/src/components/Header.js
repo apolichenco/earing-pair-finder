@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import {NavLink} from "react-router-dom"
 
-function Header({status}) {
+function Header({statusOfLogIn}) {
 
     return (
         <div>
             <NavLink to="./log_in">
-                {status}
+                {statusOfLogIn}
             </NavLink>
-            <NavLink to={"./listings"}>
+            <NavLink to="./listings">
                 Listings
             </NavLink>
         </div>

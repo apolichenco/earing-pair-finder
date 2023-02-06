@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react'
 
-function Listings() {
+function Listings({listingData}) {
 
-    const [allData, setAllData] = useState([])
-
-    // useEffect (() => {
-    //     fetch
-    //   }, [])
 
     return (
         <div>
-
+            {listingData.map((listing, index) => {
+                return (
+                <div key={index}>
+                    <h3>Seller Name: {listing.user.name}</h3>
+                    <h4>Description:</h4>
+                    <p>
+                        Color: {listing.earing.color} <br></br>
+                        Shape: {listing.earing.shape}
+                    </p>
+                    <h3>Price: ${listing.price}</h3>
+                </div>
+                )
+            })}
         </div>
     )
 }
