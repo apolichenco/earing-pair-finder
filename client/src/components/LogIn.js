@@ -15,7 +15,7 @@ function LogIn({statusOfLogIn, setStatus, onLogIn}) {
 
     function handleSignUp(e) {
         e.preventDefault()
-        fetch("/users", {
+        fetch("/signup", {
             method:"POST",
             headers: {
                 "Content-Type": "application/json", 
@@ -36,7 +36,7 @@ function LogIn({statusOfLogIn, setStatus, onLogIn}) {
 
     function handleLogIn(e) {
         e.preventDefault()
-        fetch("/users", {
+        fetch("/login", {
             method:"POST",
             headers: {
                 "Content-Type": "application/json", 
@@ -78,8 +78,6 @@ function LogIn({statusOfLogIn, setStatus, onLogIn}) {
                 {allErrors}
             </form>
         </div>
-
-    console.log(signingUp)
 
     return (
         <div>
