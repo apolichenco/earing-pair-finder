@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function NewListings() {
+function NewListing() {
 
     return (
         <div>
@@ -9,4 +9,4 @@ function NewListings() {
     )
 }
 
-export default NewListings 
+export default NewListing

@@ -4,8 +4,8 @@ import Header from './Header'
 import LogIn from './LogIn'
 import Listings from './Listings'
 import Favorites from './Favorites'
-import MyListing from './MyListing';
-import NewListings from './NewListing';
+import MyListings from './MyListings';
+import NewListing from './NewListing';
 
 function App() {
 
@@ -18,10 +18,6 @@ function App() {
         .then((r) => r.json())
         .then((data) => setAllData(data))
       }, [])
-
-      // function logInStatus(status) {
-
-      // }
 
   return (
     <div className="App">
@@ -37,10 +33,10 @@ function App() {
           <Favorites/>
         </Route>
         <Route path="/my-listings">
-          <MyListing />
+          <MyListings user={user} data={allData} />
         </Route>
         <Route path="/new-listing">
-          <NewListings />
+          <NewListing />
         </Route>
       </Switch>
     </div>
