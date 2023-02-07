@@ -17,6 +17,7 @@ function Header({statusOfLogIn}) {
             <NavLink to="./new-listing">
                 New Listing
             </NavLink>
+            <button onClick={console.log("Hello")}>Log Out</button>
         </div>
     )
 }

@@ -62,7 +62,7 @@ function LogIn({statusOfLogIn, setStatus, onLogIn}) {
                 <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} ></input><br></br>
                 <label>Password:</label><br></br>
                 <input type="text" id="password" value={password} onChange={(e) => setPassword(e.target.value)} ></input><br></br>
-                <button type="submit">{statusOfLogIn}</button>
+                <button type="submit">Sign Up</button>
                 {allErrors}
             </form>
         </div>
@@ -74,7 +74,7 @@ function LogIn({statusOfLogIn, setStatus, onLogIn}) {
                 <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} ></input><br></br>
                 <label>Password:</label><br></br>
                 <input type="text" id="password" value={password} onChange={(e) => setPassword(e.target.value)} ></input><br></br>
-                <button type="submit">{statusOfLogIn}</button>
+                <button type="submit">Log In</button>
                 {allErrors}
             </form>
         </div>
