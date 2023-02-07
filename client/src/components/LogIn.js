@@ -7,7 +7,6 @@ function LogIn({statusOfLogIn, setStatus, onLogIn}) {
 
     let allErrors = []
     if (errors) {
-        console.log(errors)
         allErrors = errors.map((err, index) => {
             return (<h5 key={index}>{err}</h5>)
         })
@@ -24,15 +23,12 @@ function LogIn({statusOfLogIn, setStatus, onLogIn}) {
         })
         .then((r) => {
             if (r.ok) {
-                // console.log("HI")
                 r.json()
                 .then((data) => {
                     setStatus("Log Out")
                  onLogIn(data)
-                })
-            }
+                })}
             else {
-                // console.log("Hello")
                 r.json()
                 .then((err) => setErrors(err.errors))
             }
@@ -48,9 +44,6 @@ function LogIn({statusOfLogIn, setStatus, onLogIn}) {
                 <input type="text" id="password" value={password} onChange={(e) => setPassword(e.target.value)} ></input><br></br>
                 <button type="submit">{statusOfLogIn}</button>
                 {allErrors}
-                {/* {errors.map((err, index) => {
-                    return (<h5 key={index}>{err}</h5>)
-                })}             */}
             </form>
 
         </div>

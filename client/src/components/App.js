@@ -4,6 +4,8 @@ import Header from './Header'
 import LogIn from './LogIn'
 import Listings from './Listings'
 import Favorites from './Favorites'
+import MyListing from './MyListing';
+import NewListings from './NewListing';
 
 function App() {
 
@@ -25,7 +27,7 @@ function App() {
     <div className="App">
       <Header statusOfLogIn={logInStatus}/>
       <Switch>
-        <Route path="/log_in">
+        <Route path="/log-in">
           <LogIn statusOfLogIn={logInStatus} setStatus={setLogInStatus} onLogIn={setUser} />
         </Route>
         <Route path="/listings">
@@ -33,6 +35,12 @@ function App() {
         </Route>
         <Route path="/favs">
           <Favorites/>
+        </Route>
+        <Route path="/my-listings">
+          <MyListing />
+        </Route>
+        <Route path="/new-listing">
+          <NewListings />
         </Route>
       </Switch>
     </div>
