@@ -12,12 +12,7 @@ function App() {
   const [logInStatus, setLogInStatus] = useState("Sign Up")
   const [allData, setAllData] = useState([])
   const [user, setUser] = useState([])
-  console.log(user)
-
-  function setUpUser(theUser) {
-    setUser(theUser)
-    console.log(theUser)
-  }
+  const [errors, setErrors] = useState([])
 
       useEffect (() => {
         fetch("/listings")
@@ -25,12 +20,26 @@ function App() {
         .then((data) => setAllData(data))
       }, [])
 
+      useEffect (() => {
+        fetch("/me")
+        .then((r) => {
+          if (r.ok) {
+              r.json().then((data) => {
+              setLogInStatus("Log Out")
+              setUser(data)
+          })}
+          else {
+              r.json().then((err) => setErrors(err.errors))
+          }
+      })
+      }, [])
+
   return (
     <div className="App">
       <Header statusOfLogIn={logInStatus}/>
       <Switch>
         <Route path="/log-in">
-          <LogIn setStatus={setLogInStatus} onLogIn={setUpUser} allData={allData}/>
+          <LogIn setStatus={setLogInStatus} onLogIn={setUser} allData={allData}/>
         </Route>
         <Route path="/listings">
           <Listings listingData={allData}/>
