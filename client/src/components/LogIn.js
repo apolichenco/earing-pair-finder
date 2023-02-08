@@ -49,10 +49,9 @@ function LogIn({setStatus, onLogIn, allData}) {
             if (r.ok) {
                 r.json().then((data) => {
                 setStatus("Log Out")
-                const theUser = allData.filter((listing) => listing.user.name === name)
-                const theUserItself = theUser.user
+                const theUser = allData.filter((listing) => listing.user.name === data.name)
+                const theUserItself = theUser[0].user
                 onLogIn(theUserItself)
-                console.log(theUser.user)
                  })}
             else {
                 r.json().then((err) => setErrors(err.errors))
