@@ -1,7 +1,13 @@
 import React, { useState } from 'react'
 import {NavLink} from "react-router-dom"
 
-function Header({statusOfLogIn}) {
+function Header({statusOfLogIn, onLogOut}) {
+
+    function deleteUser() {
+        fetch("/logout", {method: "DELETE"})
+        .then((r) => {onLogOut(null)})
+
+    }
 
     return (
         <div>
@@ -17,7 +23,7 @@ function Header({statusOfLogIn}) {
             <NavLink to="./new-listing">
                 New Listing
             </NavLink>
-            <button onClick={console.log("Hello")}>Log Out</button>
+            <a href="./log-in"><button onClick={deleteUser}>Log Out</button></a>
         </div>
     )
 }
