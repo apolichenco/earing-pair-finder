@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 
-function MyListings({user, data}) {
+function MyListings({user, allData}) {
 
     // console.log(data)
-    const thisUserListings = data.filter((data) => data.user.name === user)
-    console.log(thisUserListings)
+    const thisUserListings = allData.filter((listing) => listing.user.name === user.name)
 
     return (
         <div>

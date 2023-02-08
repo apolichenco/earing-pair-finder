@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 
-function LogIn({statusOfLogIn, setStatus, onLogIn}) {
+function LogIn({setStatus, onLogIn, allData}) {
     const [name, setName] = useState("")
     const [password, setPassword] = useState("")
-    const [errors, setErrors] = useState(false)
+    const [errors, setErrors] = useState()
     const [typeOfLogIn, setTypeOfLogIn] = useState(true)
 
     let allErrors = []
@@ -26,8 +26,10 @@ function LogIn({statusOfLogIn, setStatus, onLogIn}) {
             if (r.ok) {
                 r.json().then((data) => {
                 setStatus("Log Out")
-                 onLogIn(data.name)
-                 })}
+                console.log(data)
+                // const theUser = allData.filter((listing) => listing.user.name === name)
+                // onLogIn(theUser.user)
+            })}
             else {
                 r.json().then((err) => setErrors(err.errors))
             }
@@ -47,7 +49,10 @@ function LogIn({statusOfLogIn, setStatus, onLogIn}) {
             if (r.ok) {
                 r.json().then((data) => {
                 setStatus("Log Out")
-                 onLogIn(data.name)
+                const theUser = allData.filter((listing) => listing.user.name === name)
+                const theUserItself = theUser.user
+                onLogIn(theUserItself)
+                console.log(theUser.user)
                  })}
             else {
                 r.json().then((err) => setErrors(err.errors))
@@ -63,7 +68,6 @@ function LogIn({statusOfLogIn, setStatus, onLogIn}) {
                 <label>Password:</label><br></br>
                 <input type="text" id="password" value={password} onChange={(e) => setPassword(e.target.value)} ></input><br></br>
                 <button type="submit">Sign Up</button>
-                {allErrors}
             </form>
         </div>
 

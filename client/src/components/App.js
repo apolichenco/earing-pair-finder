@@ -11,7 +11,13 @@ function App() {
 
   const [logInStatus, setLogInStatus] = useState("Sign Up")
   const [allData, setAllData] = useState([])
-  const [user, setUser] = useState()
+  const [user, setUser] = useState([])
+  console.log(user)
+
+  function setUpUser(theUser) {
+    setUser(theUser)
+    console.log(theUser)
+  }
 
       useEffect (() => {
         fetch("/listings")
@@ -24,7 +30,7 @@ function App() {
       <Header statusOfLogIn={logInStatus}/>
       <Switch>
         <Route path="/log-in">
-          <LogIn statusOfLogIn={logInStatus} setStatus={setLogInStatus} onLogIn={setUser} />
+          <LogIn setStatus={setLogInStatus} onLogIn={setUpUser} allData={allData}/>
         </Route>
         <Route path="/listings">
           <Listings listingData={allData}/>
@@ -33,10 +39,10 @@ function App() {
           <Favorites/>
         </Route>
         <Route path="/my-listings">
-          <MyListings user={user} data={allData} />
+          <MyListings user={user} allData={allData} />
         </Route>
         <Route path="/new-listing">
-          <NewListing />
+          <NewListing allData={allData}  />
         </Route>
       </Switch>
     </div>
