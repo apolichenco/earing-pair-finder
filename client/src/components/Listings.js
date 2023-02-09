@@ -12,7 +12,7 @@ function Listings({listingData}) {
                     <h4>Description:</h4>
                     <p>
                         Color: {listing.earing.color} <br></br>
-                        Shape: {listing.earing.shape}
+                        Styling: {listing.earing.shape}
                     </p>
                     <h3>Price: ${listing.price}</h3>
                 </div>

@@ -9,30 +9,30 @@ import NewListing from './NewListing';
 
 function App() {
 
-  const [logInStatus, setLogInStatus] = useState("Sign Up")
-  const [allData, setAllData] = useState([])
-  const [user, setUser] = useState([])
-  const [errors, setErrors] = useState([])
+    const [logInStatus, setLogInStatus] = useState("Sign Up")
+    const [allData, setAllData] = useState([])
+    const [user, setUser] = useState(false)
 
-      useEffect (() => {
-        fetch("/listings")
-        .then((r) => r.json())
-        .then((data) => setAllData(data))
-      }, [])
+    useEffect (() => {
+      fetch("/listings")
+      .then((r) => r.json())
+      .then((data) => setAllData(data))
+    }, [])
 
-      useEffect (() => {
-        fetch("/me")
-        .then((r) => {
-          if (r.ok) {
-              r.json().then((data) => {
-              setLogInStatus("Log Out")
-              setUser(data)
-          })}
-          else {
-              r.json().then((err) => setErrors(err.errors))
-          }
+    useEffect (() => {
+      fetch("/me")
+      .then((r) => r.json())
+      .then((data) => {
+        setLogInStatus("Log Out")
+        setUser(data)
       })
-      }, [])
+    }, [])
+
+    function handleANewListing(newListing) {
+      console.log(newListing)
+      console.log(allData)
+      
+    }
 
   return (
     <div className="App">
@@ -51,7 +51,7 @@ function App() {
           <MyListings user={user} allData={allData} />
         </Route>
         <Route path="/new-listing">
-          <NewListing allData={allData}  />
+          <NewListing allData={allData} addANewListing={handleANewListing} />
         </Route>
       </Switch>
     </div>

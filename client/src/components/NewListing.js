@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function NewListing({allData, user}) {
+function NewListing({allData, user, addANewListing}) {
 
     const [newPrice, setNewPrice] = useState()
     const [newColor, setNewColor] = useState()
@@ -10,8 +10,7 @@ function NewListing({allData, user}) {
     const [errors, setErrors] = useState(false)
 
     const userId = allData.filter((listing) => listing.user.name === user)
-    console.log(userId)
-    console.log(user)
+    const thisUser = userId.id
 
     function handleNewListing(e) {
         e.preventDefault()
@@ -20,15 +19,16 @@ function NewListing({allData, user}) {
             headers: {
                 "Content-Type": "application/json", 
             },
-            body: JSON.stringify({userId, newListingEaringId, newPrice}),
+            body: JSON.stringify({thisUser, newListingEaringId, newPrice}),
         })
-        // .then((r) => {
-        //     if (r.ok) {
-        //         r.json().then((data) => onLogIn(data.name))}
-        //     else {
-        //         r.json().then((err) => setErrors(err.errors))
-        //     }
-        // })
+        .then((r) => {
+            if (r.ok) {
+                // r.json().then((data) => addANewListing(data))
+            }
+            else {
+                r.json().then((err) => setErrors(err.errors))
+            }
+        })
     }
 
     function handleNewEaring(e) {
@@ -46,7 +46,7 @@ function NewListing({allData, user}) {
     const newPriceForm =    <div>
         <form onSubmit={handleNewListing}>
             <label>Choose an earing here:</label>
-            <select>
+            <select onChange={(e) => setNewListingPriceId(e.target.value)}>
                 {allData.map((listing, index) => {
                     return (<option key={index} value={listing.earing.id}>{listing.earing.color} and {listing.earing.shape}</option>)
                 })}
