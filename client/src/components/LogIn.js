@@ -25,11 +25,12 @@ function LogIn({setStatus, onLogIn, allData}) {
         .then((r) => {
             if (r.ok) {
                 r.json().then((data) => {
-                setStatus("Log Out")
-                console.log(data)
-                // const theUser = allData.filter((listing) => listing.user.name === name)
-                // onLogIn(theUser.user)
-            })}
+                    setStatus("Log Out")
+                    const theUser = allData.filter((listing) => listing.user.name === data.name)
+                    const theUserItself = theUser[0].user
+                    onLogIn(theUserItself)
+                })
+            }
             else {
                 r.json().then((err) => setErrors(err.errors))
             }
@@ -48,11 +49,12 @@ function LogIn({setStatus, onLogIn, allData}) {
         .then((r) => {
             if (r.ok) {
                 r.json().then((data) => {
-                setStatus("Log Out")
-                const theUser = allData.filter((listing) => listing.user.name === data.name)
-                const theUserItself = theUser[0].user
-                onLogIn(theUserItself)
-                 })}
+                    setStatus("Log Out")
+                    const theUser = allData.filter((listing) => listing.user.name === data.name)
+                    const theUserItself = theUser[0].user
+                    onLogIn(theUserItself)
+                 })
+            }
             else {
                 r.json().then((err) => setErrors(err.errors))
             }

@@ -9,7 +9,7 @@ class ListingsController < ApplicationController
     end
 
     def show
-        listing = Listing.find(params[:user_id])
+        listing = Listing.find(params[:id])
         render json: listing
     end
 
@@ -19,13 +19,13 @@ class ListingsController < ApplicationController
     end
 
     def update
-        listing = Listing.find(params[:user_id])
+        listing = Listing.find(params[:id])
         Listing.update!(listing_params)
         render json: listing, status: 202
     end
 
     def destroy
-        listing = Listing.find(params[:user_id])
+        listing = Listing.find(params[:id])
         listing.destroy
         head :no_content
     end

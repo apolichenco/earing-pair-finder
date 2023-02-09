@@ -1,5 +1,5 @@
 class ListingSerializer < ActiveModel::Serializer
-  attributes :price
+  attributes :id, :price
 
   belongs_to :user
   belongs_to :earing

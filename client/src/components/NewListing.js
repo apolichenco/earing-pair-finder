@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 function NewListing({allData, user, addANewListing}) {
 
@@ -6,24 +6,43 @@ function NewListing({allData, user, addANewListing}) {
     const [newColor, setNewColor] = useState()
     const [newShape, setNewShape] = useState()
     const [newEaringOrPrice, setNewEaringOrPrice] = useState(true)
-    const [newListingEaringId, setNewListingPriceId] = useState()
-    const [errors, setErrors] = useState(false)
+    const [newListingEaringId, setNewListingEaringId] = useState()
+    const [errors, setErrors] = useState([])
+    const [earings, setEarings] = useState([])
 
-    const userId = allData.filter((listing) => listing.user.name === user)
-    const thisUser = userId.id
+    
+    let thisUser 
+    if (user) {thisUser = user.id}
+
+    useEffect (() => {
+        fetch("/earings")
+        .then((r) => r.json())
+        .then((data) => {
+            setEarings(data)
+            setNewListingEaringId(data[0].id)
+        })
+      }, [])
 
     function handleNewListing(e) {
         e.preventDefault()
+        const newListing = {
+            user_id: thisUser,
+            earing_id: newListingEaringId,
+            price: newPrice
+        }
         fetch("/listings", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json", 
             },
-            body: JSON.stringify({thisUser, newListingEaringId, newPrice}),
+            body: JSON.stringify(newListing),
         })
         .then((r) => {
             if (r.ok) {
-                // r.json().then((data) => addANewListing(data))
+                r.json()
+                .then((data) => {
+                    addANewListing(data)
+                })
             }
             else {
                 r.json().then((err) => setErrors(err.errors))
@@ -38,22 +57,25 @@ function NewListing({allData, user, addANewListing}) {
 
     let allErrors = []
     if (errors) {
-        allErrors = errors.map((err, index) => {
-            return (<h5 key={index}>{err}</h5>)
-        })
+        console.log(errors)
+        const objectErrors = Object.entries(errors)
+        console.log(objectErrors)
+        // allErrors = objectErrors.map((err, index) => {
+        //     return (<h5 key={index}>{err}</h5>)
+        // })
     }
 
     const newPriceForm =    <div>
         <form onSubmit={handleNewListing}>
             <label>Choose an earing here:</label>
-            <select onChange={(e) => setNewListingPriceId(e.target.value)}>
+            <select onChange={(e) => setNewListingEaringId(e.target.value)}>
                 {allData.map((listing, index) => {
                     return (<option key={index} value={listing.earing.id}>{listing.earing.color} and {listing.earing.shape}</option>)
                 })}
             </select>
             <h5>Can't find the earing you're looking for? Click <button onClick={(e) => setNewEaringOrPrice(false)}>here</button> to create a new one!</h5>
             <label>Price:</label>
-            <input type="text" id="price" value={newPrice}></input>
+            <input type="text" id="price" value={newPrice} onChange={(e) => setNewPrice(e.target.value)}></input>
             <button type="submit">Submit</button>
         </form>
         {allErrors}
@@ -62,11 +84,12 @@ function NewListing({allData, user, addANewListing}) {
     const newEaringForm =   <div>
         <form onSubmit={handleNewEaring}>
             <label>Color:</label>
-            <input type="text" id="color" value={newColor}></input>
+            <input type="text" id="color" value={newColor} onChange={(e) => setNewColor(e.target.value)}></input>
             <label>Shape:</label>
-            <input type="text" id="shape" value={newShape}></input>
+            <input type="text" id="shape" value={newShape} onChange={(e) => setNewShape(e.target.value)}></input>
             <button type="submit">Submit</button>
         </form>
+        {allErrors}
         <h5>Click <button onClick={(e) => setNewEaringOrPrice(true)}>here</button> to add a price and make a new listing</h5>
     </div>
 

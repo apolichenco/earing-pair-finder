@@ -29,9 +29,15 @@ function App() {
     }, [])
 
     function handleANewListing(newListing) {
-      console.log(newListing)
-      console.log(allData)
-      
+      setAllData(allData.push(newListing))
+    }
+
+    function handleDeleteListing(listingId) {
+      console.log(listingId)
+    }
+
+    function handleEditedListing() {
+      console.log("HI")
     }
 
   return (
@@ -42,7 +48,7 @@ function App() {
           <LogIn setStatus={setLogInStatus} onLogIn={setUser} allData={allData}/>
         </Route>
         <Route path="/listings">
-          <Listings listingData={allData}/>
+          <Listings listingData={allData} onDeleteListing={handleDeleteListing} onEditListing={handleEditedListing}/>
         </Route>
         <Route path="/favs">
           <Favorites/>
@@ -51,7 +57,7 @@ function App() {
           <MyListings user={user} allData={allData} />
         </Route>
         <Route path="/new-listing">
-          <NewListing allData={allData} addANewListing={handleANewListing} />
+          <NewListing allData={allData} addANewListing={handleANewListing} user={user}/>
         </Route>
       </Switch>
     </div>
