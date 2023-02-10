@@ -1,18 +1,17 @@
 import React, { useState } from 'react'
 import {NavLink} from "react-router-dom"
 
-function Header({onLogOut}) {
+function Header({onLogOut, statusOfLogIn}) {
 
     function deleteUser() {
         fetch("/logout", {method: "DELETE"})
         .then((r) => {onLogOut(null)})
-
     }
 
     return (
         <div>
             <NavLink to="./log-in">
-                Sign In/Log In
+                {statusOfLogIn}
             </NavLink>
             <NavLink to="./listings">
                 Listings

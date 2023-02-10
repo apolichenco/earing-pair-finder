@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 function LogIn({setStatus, onLogIn, allData}) {
     const [name, setName] = useState("")
@@ -25,9 +25,9 @@ function LogIn({setStatus, onLogIn, allData}) {
         .then((r) => {
             if (r.ok) {
                 r.json().then((data) => {
-                    setStatus("Log Out")
                     const theUser = allData.filter((listing) => listing.user.name === data.name)
                     const theUserItself = theUser[0].user
+                    setStatus(`Welcome ${theUserItself.name}`)
                     onLogIn(theUserItself)
                 })
             }
@@ -49,9 +49,9 @@ function LogIn({setStatus, onLogIn, allData}) {
         .then((r) => {
             if (r.ok) {
                 r.json().then((data) => {
-                    setStatus("Log Out")
                     const theUser = allData.filter((listing) => listing.user.name === data.name)
                     const theUserItself = theUser[0].user
+                    setStatus(`Welcome ${theUserItself.name}`)
                     onLogIn(theUserItself)
                  })
             }

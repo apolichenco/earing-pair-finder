@@ -9,7 +9,7 @@ import NewListing from './NewListing';
 
 function App() {
 
-    const [logInStatus, setLogInStatus] = useState("Sign Up")
+    const [logInStatus, setLogInStatus] = useState("Sign In/Log In")
     const [allData, setAllData] = useState([])
     const [user, setUser] = useState(false)
 
@@ -23,7 +23,7 @@ function App() {
       fetch("/me")
       .then((r) => r.json())
       .then((data) => {
-        setLogInStatus("Log Out")
+        setLogInStatus(`Welcome ${data.name}`)
         setUser(data)
       })
     }, [])
