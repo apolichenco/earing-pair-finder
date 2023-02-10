@@ -61,7 +61,7 @@ function App() {
           <MyListings user={user} allData={allData} />
         </Route>
         <Route path="/new-listing">
-          <NewListing allData={allData} addANewListing={handleANewListing} user={user}/>
+          <NewListing allData={allData} addANewListing={handleANewListing} user={user} />
         </Route>
       </Switch>
     </div>

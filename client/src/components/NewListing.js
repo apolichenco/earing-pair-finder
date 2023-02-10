@@ -53,7 +53,31 @@ function NewListing({allData, user, addANewListing}) {
 
     function handleNewEaring(e) {
         e.preventDefault()
-        console.log("Jkck")
+        const newEaring = {
+            color: newColor,
+            shape: newShape
+        }
+        fetch("/earings", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json", 
+            },
+            body: JSON.stringify(newEaring),
+        })
+        .then((r) => {
+            if (r.ok) {
+                r.json()
+                .then((data) => {
+                    const earingList = earings
+                    earingList.push(data)
+                    setEarings(earingList)
+                    setErrors([])
+                })
+            }
+            else {
+                r.json().then((err) => setErrors(err.errors))
+            }
+        })
     }
 
     let allErrors = []
@@ -68,9 +92,7 @@ function NewListing({allData, user, addANewListing}) {
         <form onSubmit={handleNewListing}>
             <label>Choose an earing here:</label>
             <select onChange={(e) => setNewListingEaringId(e.target.value)}>
-                {allData.map((listing, index) => {
-                    return (<option key={index} value={listing.earing.id}>{listing.earing.color} and {listing.earing.shape}</option>)
-                })}
+                {earings.map((earing, index) => <option key={index} value={earing.id}>{earing.color} and {earing.shape}</option>)}
             </select>
             <h5>Can't find the earing you're looking for? Click <button onClick={(e) => setNewEaringOrPrice(false)}>here</button> to create a new one!</h5>
             <label>Price:</label>
