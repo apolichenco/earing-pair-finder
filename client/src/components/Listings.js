@@ -11,8 +11,8 @@ function Listings({listingData, onDeleteListing, onEditListing}) {
                     <h3>Seller Name: {listing.user.name}</h3>
                     <h4>Description:</h4>
                     <p>
-                        Color: {listing.earing.color} <br></br>
-                        Styling: {listing.earing.shape}
+                        Color: {listing.earing.capitalized_color} <br></br>
+                        Styling: {listing.earing.capitalized_shape}
                     </p>
                     <h3>Price: ${listing.price}</h3>
                     <EditListing price={listing.price} id={listing.id} onEdit={onEditListing} onDelete={onDeleteListing}/>

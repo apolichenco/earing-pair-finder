@@ -9,8 +9,8 @@ function MyListings({user, allData}) {
             <div key={index}>
                 <h4>Description:</h4>
                 <p>
-                    Color: {listing.earing.color} <br></br>
-                    Styling: {listing.earing.shape}
+                    Color: {listing.earing.capitalized_color} <br></br>
+                    Styling: {listing.earing.capitalized_shape}
                 </p>
                 <h3>Price: ${listing.price}</h3>
             </div>
