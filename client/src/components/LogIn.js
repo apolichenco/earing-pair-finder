@@ -29,6 +29,7 @@ function LogIn({setStatus, onLogIn, allData}) {
                     const theUserItself = theUser[0].user
                     setStatus(`Welcome ${theUserItself.name}`)
                     onLogIn(theUserItself)
+                    setErrors([])
                 })
             }
             else {
@@ -53,6 +54,7 @@ function LogIn({setStatus, onLogIn, allData}) {
                     const theUserItself = theUser[0].user
                     setStatus(`Welcome ${theUserItself.name}`)
                     onLogIn(theUserItself)
+                    setErrors([])
                  })
             }
             else {

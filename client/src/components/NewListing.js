@@ -42,6 +42,7 @@ function NewListing({allData, user, addANewListing}) {
                 r.json()
                 .then((data) => {
                     addANewListing(data)
+                    setErrors([])
                 })
             }
             else {

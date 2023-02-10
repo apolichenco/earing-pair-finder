@@ -3,6 +3,7 @@ import React, { useState } from "react";
 function EditListing({price, id, onEdit, onDelete}) {
     const [editedPrice, setEditedPrices] = useState(price) 
     const [editingStatus, setEditingStatus] = useState(true)
+    const [errors, setErrors] = useState([])
 
     function handleDelete(id) {
         fetch(`/listings/${id}`, {
@@ -26,10 +27,26 @@ function EditListing({price, id, onEdit, onDelete}) {
                 price: editedPrice
             }),
         })
-        .then((r) => r.json())
+        .then((r) => {
+            if (r.ok) {
+                r.json()
         .then((updatedListing) => {
             onEdit(updatedListing)
             setEditingStatus(true)
+            setErrors([])
+        })
+            }
+            else {
+                r.json().then((err) => setErrors(err.errors))
+            }
+        })
+    }
+
+    let allErrors = []
+    if (errors) {
+        const objectErrors = Object.entries(errors)
+        allErrors = objectErrors.map((err, index) => {
+            return (<h5 key={index}>{err}</h5>)
         })
     }
 
@@ -49,6 +66,7 @@ function EditListing({price, id, onEdit, onDelete}) {
             <button onClick={handleEdit}>
                 <span>✏️</span>
             </button>
+            {allErrors}
         </div>
     )
 }
