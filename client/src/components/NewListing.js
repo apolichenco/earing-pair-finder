@@ -57,12 +57,10 @@ function NewListing({allData, user, addANewListing}) {
 
     let allErrors = []
     if (errors) {
-        console.log(errors)
         const objectErrors = Object.entries(errors)
-        console.log(objectErrors)
-        // allErrors = objectErrors.map((err, index) => {
-        //     return (<h5 key={index}>{err}</h5>)
-        // })
+        allErrors = objectErrors.map((err, index) => {
+            return (<h5 key={index}>{err}</h5>)
+        })
     }
 
     const newPriceForm =    <div>

@@ -29,7 +29,9 @@ function App() {
     }, [])
 
     function handleANewListing(newListing) {
-      setAllData(allData.push(newListing))
+      const newList = allData
+      newList.push(newListing)
+      setAllData(newList)
     }
 
     function handleDeleteListing(listingId) {
@@ -37,11 +39,9 @@ function App() {
     }
 
     function handleEditedListing(editedListing) {
-      console.log(editedListing)
-      const withoutEditedListing = allData.filter((listing) => listing.id !== editedListing.id)
-      // setAllData(withoutEditedListing.push(editedListing))
-      console.log(withoutEditedListing)
-      console.log(withoutEditedListing.push(editedListing))
+      const listWithoutEdited = allData.filter((listing) => listing.id !== editedListing.id)
+      listWithoutEdited.push(editedListing)
+      setAllData(listWithoutEdited)
     }
 
   return (

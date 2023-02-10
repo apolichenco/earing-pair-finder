@@ -27,8 +27,10 @@ function EditListing({price, id, onEdit, onDelete}) {
             }),
         })
         .then((r) => r.json())
-        .then((updatedListing) => console.log(updatedListing))
-        setEditingStatus(true)
+        .then((updatedListing) => {
+            onEdit(updatedListing)
+            setEditingStatus(true)
+        })
     }
 
     const editingHtml = <div>
