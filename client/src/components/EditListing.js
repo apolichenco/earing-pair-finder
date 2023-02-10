@@ -1,7 +1,19 @@
 import React, { useState } from "react";
 
-function EditListing({price, id, onEdit, trueEditing}) {
+function EditListing({price, id, onEdit, onDelete}) {
     const [editedPrice, setEditedPrices] = useState(price) 
+    const [editingStatus, setEditingStatus] = useState(true)
+
+    function handleDelete(id) {
+        fetch(`/listings/${id}`, {
+            method: "DELETE",
+        })
+        onDelete(id)
+      }
+
+      function handleEdit() {
+        setEditingStatus(!editingStatus)
+      }
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -15,15 +27,27 @@ function EditListing({price, id, onEdit, trueEditing}) {
             }),
         })
         .then((r) => r.json())
-        .then((updatedListing) => onEdit(updatedListing))
-        trueEditing(true)
+        .then((updatedListing) => console.log(updatedListing))
+        setEditingStatus(true)
     }
+
+    const editingHtml = <div>
+                <form onSubmit={handleSubmit}> 
+                <input type="text" name="price" value={editedPrice} onChange={(e) => setEditedPrices(e.target.value)}/>
+                <input type="submit" value="Save"/>
+            </form>
+        </div>
     
     return (
-        <form onSubmit={handleSubmit}> 
-            <input type="text" name="price" value={editedPrice} onChange={(e) => setEditedPrices(e.target.value)}/>
-            <input type="submit" value="Save"/>
-        </form>
+        <div>
+            {editingStatus ? null : editingHtml } 
+            <button onClick={(e) => handleDelete(id)}>
+                <span>🗑️</span>
+            </button>
+            <button onClick={handleEdit}>
+                <span>✏️</span>
+            </button>
+        </div>
     )
 }
 

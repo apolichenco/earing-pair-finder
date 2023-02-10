@@ -33,11 +33,15 @@ function App() {
     }
 
     function handleDeleteListing(listingId) {
-      console.log(listingId)
+      setAllData(allData.filter((listing) => listing.id !== listingId))
     }
 
-    function handleEditedListing() {
-      console.log("HI")
+    function handleEditedListing(editedListing) {
+      console.log(editedListing)
+      const withoutEditedListing = allData.filter((listing) => listing.id !== editedListing.id)
+      // setAllData(withoutEditedListing.push(editedListing))
+      console.log(withoutEditedListing)
+      console.log(withoutEditedListing.push(editedListing))
     }
 
   return (

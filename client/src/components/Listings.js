@@ -3,19 +3,18 @@ import EditListing from './EditListing'
 
 function Listings({listingData, onDeleteListing, onEditListing}) {
 
-    const [editing, setEditing] = useState(true)
+    // const [editingStatus, setEditingStatus] = useState(true)
 
-    function handleDelete(id) {
-        console.log(id)
-        fetch(`/listings/${id}`, {
-            method: "DELETE",
-        })
-        onDeleteListing(id)
-      }
-    
-      function handleEdit() {
-        setEditing(!editing)
-      }
+    // function handleDelete(id) {
+    //     fetch(`/listings/${id}`, {
+    //         method: "DELETE",
+    //     })
+    //     onDeleteListing(id)
+    //   }
+
+    //   function handleEdit() {
+    //     setEditingStatus(!editingStatus)
+    //   }
 
     return (
         <div>
@@ -29,13 +28,13 @@ function Listings({listingData, onDeleteListing, onEditListing}) {
                         Styling: {listing.earing.shape}
                     </p>
                     <h3>Price: ${listing.price}</h3>
-                    {editing ? null : <EditListing price={listing.price} id={listing.id} onEdit={onEditListing} trueEditing={handleEdit}/> } 
-                    <button onClick={(e) => handleDelete(listing.id)}>
+                    <EditListing price={listing.price} id={listing.id} onEdit={onEditListing} onDelete={onDeleteListing}/>
+                    {/* <button onClick={(e) => handleDelete(listing.id)}>
                         <span>🗑️</span>
                     </button>
                     <button onClick={handleEdit}>
                         <span>✏️</span>
-                    </button>
+                    </button> */}
                 </div>
                 )
             })}
