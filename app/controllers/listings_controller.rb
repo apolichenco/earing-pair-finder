@@ -19,8 +19,8 @@ class ListingsController < ApplicationController
     end
 
     def update
-        listing = Listing.find(params[:id])
-        Listing.update!(listing_params)
+        listing = Listing.find_by(id: params[:id])
+        listing.update!(listing_params)
         render json: listing, status: 202
     end
 
