@@ -7,4 +7,8 @@ class User < ApplicationRecord
     validates :name, presence: true, uniqueness: true
     validates :password, presence: true 
 
+    def listing_amount
+        self.listings.count
+    end
+
 end

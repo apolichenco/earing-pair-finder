@@ -1,18 +1,20 @@
-import React, { useState } from 'react'
+import React from 'react'
+import EditListing from './EditListing'
 
-function MyListings({user, allData}) {
+function MyListings({user, allData, onDeleteListing, onEditListing}) {
 
     const thisUserListings = allData.filter((listing) => listing.user.name === user.name)
 
-    const ifLoggedIn = thisUserListings.map((listing, index) => {
+    const ifLoggedIn = thisUserListings.map((listing) => {
         return (
-            <div key={index}>
+            <div key={listing.id}>
                 <h4>Description:</h4>
                 <p>
                     Color: {listing.earing.capitalized_color} <br></br>
                     Styling: {listing.earing.capitalized_shape}
                 </p>
                 <h3>Price: ${listing.price}</h3>
+                <EditListing price={listing.price} id={listing.id} onEdit={onEditListing} onDelete={onDeleteListing}/>
             </div>
         )
     })

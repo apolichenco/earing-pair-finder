@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import EditListing from './EditListing'
 
 function Listings({listingData, onDeleteListing, onEditListing}) {
 
     return (
         <div>
-            {listingData.map((listing, index) => {
+            {listingData.map((listing) => {
                 return (
-                <div key={index}>
+                <div key={listing.id}>
                     <h3>Seller Name: {listing.user.name}</h3>
                     <h4>Description:</h4>
                     <p>

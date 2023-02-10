@@ -21,11 +21,18 @@ function App() {
 
     useEffect (() => {
       fetch("/me")
-      .then((r) => r.json())
-      .then((data) => {
-        setLogInStatus(`Welcome ${data.name}`)
-        setUser(data)
-      })
+      .then((r) => {
+        if (r.ok) {
+            r.json()
+            .then((data) => {
+            setLogInStatus(`Welcome ${data.name}`)
+            setUser(data)
+            })
+        }
+        else {
+            r.json().then((err) => setUser(false))
+        }
+    })
     }, [])
 
     function handleANewListing(newListing) {
@@ -52,13 +59,13 @@ function App() {
           <LogIn setStatus={setLogInStatus} onLogIn={setUser} allData={allData}/>
         </Route>
         <Route path="/listings">
-          <Listings listingData={allData} onDeleteListing={handleDeleteListing} onEditListing={handleEditedListing}/>
+          <Listings listingData={allData} />
         </Route>
         <Route path="/favs">
           <Favorites/>
         </Route>
         <Route path="/my-listings">
-          <MyListings user={user} allData={allData} />
+          <MyListings user={user} allData={allData} onDeleteListing={handleDeleteListing} onEditListing={handleEditedListing} />
         </Route>
         <Route path="/new-listing">
           <NewListing allData={allData} addANewListing={handleANewListing} user={user} />

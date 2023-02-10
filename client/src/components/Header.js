@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {NavLink} from "react-router-dom"
 
 function Header({onLogOut, statusOfLogIn}) {
 
     function deleteUser() {
         fetch("/logout", {method: "DELETE"})
-        .then((r) => {onLogOut(null)})
+        .then((r) => {onLogOut(false)})
     }
 
     return (
