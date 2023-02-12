@@ -4,13 +4,5 @@ class Earing < ApplicationRecord
     validates :color, presence: true, uniqueness: {scope: :shape}
     validates :shape, presence: true
 
-    def capitalized_shape
-        @shape = self.shape.capitalize()
-    end
-
-    def capitalized_color
-        @color = self.color.capitalize()
-    end
-
 
 end
