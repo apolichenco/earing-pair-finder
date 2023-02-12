@@ -28,6 +28,7 @@ function LogIn({setStatus, onLogIn}) {
                     setStatus(`Welcome ${newUser.name}`)
                     onLogIn(newUser)
                     setErrors([])
+                    console.log("Succesfull!")
                 })
             }
             else {
@@ -51,6 +52,7 @@ function LogIn({setStatus, onLogIn}) {
                     setStatus(`Welcome ${newUser.name}`)
                     onLogIn(newUser)
                     setErrors([])
+                    console.log("Succesfull!")
                  })
             }
             else {

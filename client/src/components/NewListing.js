@@ -43,6 +43,7 @@ function NewListing({allData, user, addANewListing}) {
                 .then((data) => {
                     addANewListing(data)
                     setErrors([])
+                    console.log("Succesfull!")
                 })
             }
             else {
@@ -72,6 +73,7 @@ function NewListing({allData, user, addANewListing}) {
                     earingList.push(data)
                     setEarings(earingList)
                     setErrors([])
+                    console.log("Succesfull!")
                 })
             }
             else {
