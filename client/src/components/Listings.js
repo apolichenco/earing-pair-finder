@@ -1,5 +1,4 @@
 import React from 'react'
-import EditListing from './EditListing'
 
 function Listings({listingData}) {
 

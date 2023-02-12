@@ -5,7 +5,10 @@ function MyListings({user, allData, onDeleteListing, onEditListing}) {
 
     const thisUserListings = allData.filter((listing) => listing.user.name === user.name)
 
-    const ifLoggedIn = thisUserListings.map((listing) => {
+    let ifLoggedIn = []
+
+    if (thisUserListings.length > 0) {
+        ifLoggedIn = thisUserListings.map((listing) => {
         return (
             <div key={listing.id}>
                 <h4>Description:</h4>
@@ -17,7 +20,10 @@ function MyListings({user, allData, onDeleteListing, onEditListing}) {
                 <EditListing price={listing.price} id={listing.id} onEdit={onEditListing} onDelete={onDeleteListing}/>
             </div>
         )
-    })
+        })}
+    else {
+        ifLoggedIn =  <h5>You have no listings</h5>
+    }
 
     return (
         <div>
