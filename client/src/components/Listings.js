@@ -1,7 +1,7 @@
 import React from 'react'
 import EditListing from './EditListing'
 
-function Listings({listingData, onDeleteListing, onEditListing}) {
+function Listings({listingData}) {
 
     return (
         <div>
@@ -15,7 +15,6 @@ function Listings({listingData, onDeleteListing, onEditListing}) {
                         Styling: {listing.earing.shape}
                     </p>
                     <h3>Price: ${listing.price}</h3>
-                    <EditListing price={listing.price} id={listing.id} onEdit={onEditListing} onDelete={onDeleteListing}/>
                 </div>
                 )
             })}
