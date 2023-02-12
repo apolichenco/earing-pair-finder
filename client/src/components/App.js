@@ -53,7 +53,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header statusOfLogIn={logInStatus} onLogOut={setUser}/>
+      <Header statusOfLogIn={logInStatus} onLogOut={setUser} setStatus={setLogInStatus}/>
       <Switch>
         <Route path="/log-in">
           <LogIn setStatus={setLogInStatus} onLogIn={setUser} allData={allData}/>

@@ -8,9 +8,10 @@ class EaringsController < ApplicationController
     end
 
     def create
-        earing = Earing.create!(earing_params)
-        earing.shape.capitalize()
-        earing.color.capitalize()
+        earing = Earing.save!(earing_params)
+        # earing.shape.capitalize()
+        # earing.color.capitalize()
+        # earing.save
         render json: earing, status: :created
     end
 

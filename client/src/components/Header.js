@@ -1,11 +1,14 @@
 import React from 'react'
 import {NavLink} from "react-router-dom"
 
-function Header({onLogOut, statusOfLogIn}) {
+function Header({onLogOut, statusOfLogIn, setStatus}) {
 
     function deleteUser() {
         fetch("/logout", {method: "DELETE"})
-        .then((r) => {onLogOut(false)})
+        .then((r) => {
+            onLogOut(false)
+            setStatus("Sign In/Log In")
+        })
     }
 
     return (

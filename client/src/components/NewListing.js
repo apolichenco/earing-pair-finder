@@ -92,7 +92,7 @@ function NewListing({allData, user, addANewListing}) {
         <form onSubmit={handleNewListing}>
             <label>Choose an earing here:</label>
             <select onChange={(e) => setNewListingEaringId(e.target.value)}>
-                {earings.map((earing) => <option key={earing.id} value={earing.id}>{earing.capitalized_color} and {earing.capitalized_shape}</option>)}
+                {earings.map((earing) => <option key={earing.id} value={earing.id}>{earing.color} and {earing.shape}</option>)}
             </select>
             <h5>Can't find the earing you're looking for? Click <button onClick={(e) => setNewEaringOrPrice(false)}>here</button> to create a new one!</h5>
             <label>Price:</label>
