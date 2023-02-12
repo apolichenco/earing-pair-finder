@@ -56,7 +56,7 @@ function App() {
       <Header statusOfLogIn={logInStatus} onLogOut={setUser} setStatus={setLogInStatus}/>
       <Switch>
         <Route path="/log-in">
-          <LogIn setStatus={setLogInStatus} onLogIn={setUser} allData={allData}/>
+          <LogIn setStatus={setLogInStatus} onLogIn={setUser}/>
         </Route>
         <Route path="/listings">
           <Listings listingData={allData} />

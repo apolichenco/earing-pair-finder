@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function LogIn({setStatus, onLogIn, allData}) {
+function LogIn({setStatus, onLogIn}) {
     const [name, setName] = useState("")
     const [password, setPassword] = useState("")
     const [errors, setErrors] = useState()
@@ -24,11 +24,9 @@ function LogIn({setStatus, onLogIn, allData}) {
         })
         .then((r) => {
             if (r.ok) {
-                r.json().then((data) => {
-                    const theUser = allData.filter((listing) => listing.user.name === data.name)
-                    const theUserItself = theUser[0].user
-                    setStatus(`Welcome ${theUserItself.name}`)
-                    onLogIn(theUserItself)
+                r.json().then((newUser) => {
+                    setStatus(`Welcome ${newUser.name}`)
+                    onLogIn(newUser)
                     setErrors([])
                 })
             }
@@ -49,11 +47,9 @@ function LogIn({setStatus, onLogIn, allData}) {
         })
         .then((r) => {
             if (r.ok) {
-                r.json().then((data) => {
-                    const theUser = allData.filter((listing) => listing.user.name === data.name)
-                    const theUserItself = theUser[0].user
-                    setStatus(`Welcome ${theUserItself.name}`)
-                    onLogIn(theUserItself)
+                r.json().then((newUser) => {
+                    setStatus(`Welcome ${newUser.name}`)
+                    onLogIn(newUser)
                     setErrors([])
                  })
             }

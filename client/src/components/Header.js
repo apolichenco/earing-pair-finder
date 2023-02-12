@@ -14,16 +14,16 @@ function Header({onLogOut, statusOfLogIn, setStatus}) {
     return (
         <div>
             <NavLink to="./log-in">
-                {statusOfLogIn}
+                {statusOfLogIn}     
             </NavLink>
             <NavLink to="./listings">
-                Listings
+                Listings     
             </NavLink>
             <NavLink to="./my-listings">
-                My Listings
+                My Listings    
             </NavLink>
             <NavLink to="./new-listing">
-                New Listing
+                New Listing    
             </NavLink>
             <a href="./log-in"><button onClick={deleteUser}>Log Out</button></a>
         </div>
