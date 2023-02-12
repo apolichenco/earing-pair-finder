@@ -9,6 +9,7 @@ A lot of people pwn a pair of earings, but what if you lose one of the earings, 
    * Have a look at earings you're selling
    * Be able to change the price or completely delete a listing
    * Can create a new listing for a new earing you want to sell
+   * Can't make a new listing over $150
    * Can also create a new category of earing
    * Can stay logged in even after refreshing the page
    * Can also logout once you are done
@@ -16,13 +17,14 @@ A lot of people pwn a pair of earings, but what if you lose one of the earings, 
 ### Installation Instructions
 * Fork and clone this repo to your computer
 * Run bundle install to access all the gemfiles
-* Run bundle exec rake db:migrate to create the table, and bundle exec rake db:seed if you want some generic data
-* Run bundle exec rake server to create a server
-* Make sure the number in the "localhost/number" made matches to the number in the link for the fetches
-* Run npm install --prefix client to install all the gems
+* Run rails db:migrate to create the table, and bundle exec rake db:seed if you want some generic data
+* Run rails s to create a server
+* Run npm install --prefix client to install all the gems for React
 * Run npm start --prefix client and clink the link (localhost/...) to show the app on your webpage
 * Sign up with username and password to enjoy all the perks
 
 ### Problems
 * Create a filter in all listings to show specific listings
 * The earings descriptions need to be more specific, but that's for when I have more time
+* Let you know if a signup, login, new listing, etc was succesful
+* Not change the order of the list when I edit a listing
