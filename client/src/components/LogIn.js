@@ -27,8 +27,7 @@ function LogIn({setStatus, onLogIn}) {
                 r.json().then((newUser) => {
                     setStatus(`Welcome ${newUser.name}`)
                     onLogIn(newUser)
-                    setErrors([])
-                    console.log("Succesfull!")
+                    setErrors(["You are logged in!"])
                 })
             }
             else {
@@ -51,8 +50,7 @@ function LogIn({setStatus, onLogIn}) {
                 r.json().then((newUser) => {
                     setStatus(`Welcome ${newUser.name}`)
                     onLogIn(newUser)
-                    setErrors([])
-                    console.log("Succesfull!")
+                    setErrors(["You are logged in!"])
                  })
             }
             else {

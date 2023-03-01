@@ -42,8 +42,7 @@ function NewListing({allData, user, addANewListing}) {
                 r.json()
                 .then((data) => {
                     addANewListing(data)
-                    setErrors([])
-                    console.log("Succesfull!")
+                    setErrors(["Succesfull!"])
                 })
             }
             else {
@@ -72,8 +71,7 @@ function NewListing({allData, user, addANewListing}) {
                     const earingList = earings
                     earingList.push(data)
                     setEarings(earingList)
-                    setErrors([])
-                    console.log("Succesfull!")
+                    setErrors(["Succesfull!"])
                 })
             }
             else {
@@ -84,10 +82,12 @@ function NewListing({allData, user, addANewListing}) {
 
     let allErrors = []
     if (errors) {
+        console.log(errors)
         const objectErrors = Object.entries(errors)
         allErrors = objectErrors.map((err, index) => {
             return (<h5 key={index}>{err}</h5>)
         })
+
     }
 
     const newPriceForm =    <div>

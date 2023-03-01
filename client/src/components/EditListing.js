@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function EditListing({price, id, onEdit, onDelete}) {
+function EditListing({price, id, onEditBigList, onEditMyList, onDelete}) {
     const [editedPrice, setEditedPrices] = useState(price) 
     const [editingStatus, setEditingStatus] = useState(true)
     const [errors, setErrors] = useState([])
@@ -31,7 +31,8 @@ function EditListing({price, id, onEdit, onDelete}) {
             if (r.ok) {
                 r.json()
         .then((updatedListing) => {
-            onEdit(updatedListing)
+            onEditBigList(updatedListing)
+            onEditMyList(updatedListing)
             setEditingStatus(true)
             setErrors([])
         })

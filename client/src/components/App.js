@@ -46,8 +46,15 @@ function App() {
     }
 
     function handleEditedListing(editedListing) {
-      const listWithoutEdited = allData.filter((listing) => listing.id !== editedListing.id)
-      listWithoutEdited.push(editedListing)
+      const listWithoutEdited = allData.map((listing) => {
+        if (listing.id !== editedListing.id) {
+          return listing
+        }
+        else {
+          return editedListing
+        }
+        })
+      // listWithoutEdited.push(editedListing)
       setAllData(listWithoutEdited)
     }
 

@@ -1,5 +1,8 @@
 class ListingsController < ApplicationController
 
+    before_action :authorize
+    skip_before_action :authorize, only: [:index]
+
     rescue_from ActiveRecord::RecordInvalid, with: :render_unproccesable_entity_response
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
@@ -9,8 +12,8 @@ class ListingsController < ApplicationController
     end
 
     def show
-        listing = Listing.find(params[:id])
-        render json: listing
+        myListings = Listing.select {|v| v.user.id == session[:user_id] }
+        render json: myListings
     end
 
     def create
@@ -37,11 +40,14 @@ class ListingsController < ApplicationController
     end
     
     def render_unproccesable_entity_response(invalid)
-        render json: {errors: invalid.record.errors}, status: :unprocessable_entity
+        render json: {errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
     end
 
     def render_not_found_response
-        render json: {error: "Listing Not Found"}, status: :not_found
+        render json: {errors: ["Listing Not Found"]}, status: :not_found
     end
 
+    def authorize
+        return render json: { errors: ["You are not logged in"]}, status: :unauthorized unless session.include? :user_id
+    end
 end

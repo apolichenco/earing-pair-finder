@@ -1,33 +1,57 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import EditListing from './EditListing'
 
-function MyListings({user, allData, onDeleteListing, onEditListing}) {
+function MyListings({ onDeleteListing, onEditListing}) {
 
-    const thisUserListings = allData.filter((listing) => listing.user.name === user.name)
+    const [loggedIn, setLoggedIn] = useState(false)
+    const [myListingData, setMyListingData] = useState([])
+    const [error, setError] = useState([])
 
-    let ifLoggedIn = []
+    useEffect (() => {
+        fetch("/my-listings")
+        .then((r) => {
+            if (r.ok) {
+                r.json()
+                .then((data) => {
+                    setMyListingData(data)
+                    setLoggedIn(true)
+                })
+            }
+            else {
+                r.json().then((err) => setError(err.errors))
+            }
+        })
 
-    if (thisUserListings.length > 0) {
-        ifLoggedIn = thisUserListings.map((listing) => {
-        return (
-            <div key={listing.id}>
-                <h4>Description:</h4>
-                <p>
-                    Color: {listing.earing.color} <br></br>
-                    Styling: {listing.earing.shape}
-                </p>
-                <h3>Price: ${listing.price}</h3>
-                <EditListing price={listing.price} id={listing.id} onEdit={onEditListing} onDelete={onDeleteListing}/>
-            </div>
-        )
-        })}
-    else {
-        ifLoggedIn =  <h5>You have no listings</h5>
-    }
+      }, [])
+
+      function handleEditedListing(editedListing) {
+        const listWithoutEdited = myListingData.map((listing) => {
+          if (listing.id !== editedListing.id) {
+            return listing
+          }
+          else {
+            return editedListing
+          }
+          })
+        setMyListingData(listWithoutEdited)
+      }
+
+        const ifLoggedIn = myListingData.map((listing) => {
+            return (
+                <div key={listing.id}>
+                    <h4>Description:</h4>
+                    <p>
+                        Color: {listing.earing.color} <br></br>
+                        Styling: {listing.earing.shape}
+                    </p>
+                    <h3>Price: ${listing.price}</h3>
+                    <EditListing price={listing.price} id={listing.id} onEditBigList={onEditListing} onEditMyList={handleEditedListing} onDelete={onDeleteListing}/>
+                </div>
+            )})
 
     return (
         <div>
-            {user ? ifLoggedIn : <h4>You are not Logged in</h4>}
+            {loggedIn ? ifLoggedIn : error}
         </div>
     )
 }
