@@ -11,9 +11,10 @@ class ListingsController < ApplicationController
         render json: listings, status: :created
     end
 
-    def show
-        myListings = Listing.select {|v| v.user.id == session[:user_id] }
-        render json: myListings
+    def indexIndiv
+        user = User.find(session[:user_id])
+        listings = user.listings
+        render json: listings
     end
 
     def create

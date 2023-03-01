@@ -8,7 +8,7 @@ function MyListings({ onDeleteListing, onEditListing}) {
     const [error, setError] = useState([])
 
     useEffect (() => {
-        fetch("/my-listings")
+        fetch("/user-listings")
         .then((r) => {
             if (r.ok) {
                 r.json()
@@ -25,6 +25,7 @@ function MyListings({ onDeleteListing, onEditListing}) {
       }, [])
 
       function handleEditedListing(editedListing) {
+        onEditListing(editedListing)
         const listWithoutEdited = myListingData.map((listing) => {
           if (listing.id !== editedListing.id) {
             return listing
@@ -36,6 +37,11 @@ function MyListings({ onDeleteListing, onEditListing}) {
         setMyListingData(listWithoutEdited)
       }
 
+      function handleDeleteListing(listingId) {
+        onDeleteListing(listingId)
+        setMyListingData(myListingData.filter((listing) => listing.id !== listingId))
+      }
+
         const ifLoggedIn = myListingData.map((listing) => {
             return (
                 <div key={listing.id}>
@@ -45,7 +51,7 @@ function MyListings({ onDeleteListing, onEditListing}) {
                         Styling: {listing.earing.shape}
                     </p>
                     <h3>Price: ${listing.price}</h3>
-                    <EditListing price={listing.price} id={listing.id} onEditBigList={onEditListing} onEditMyList={handleEditedListing} onDelete={onDeleteListing}/>
+                    <EditListing price={listing.price} id={listing.id} onEditLists={handleEditedListing} onDelete={handleDeleteListing}/>
                 </div>
             )})
 

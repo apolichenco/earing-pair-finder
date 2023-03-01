@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { UserContext } from '../context/user'
 
-function NewListing({ user, addANewListing}) {
+function NewListing({ addANewListing}) {
 
-    const [newPrice, setNewPrice] = useState()
-    const [newColor, setNewColor] = useState()
-    const [newShape, setNewShape] = useState()
+    const [newPrice, setNewPrice] = useState("")
+    const [newColor, setNewColor] = useState("")
+    const [newShape, setNewShape] = useState("")
     const [newEaringOrPrice, setNewEaringOrPrice] = useState(true)
-    const [newListingEaringId, setNewListingEaringId] = useState()
+    const [newListingEaringId, setNewListingEaringId] = useState(0)
     const [errors, setErrors] = useState([])
     const [earings, setEarings] = useState([])
 
+    const {user} = useContext(UserContext)
+
     
-    let thisUser 
-    if (user) {thisUser = user.id}
+    // let thisUser 
+    // if (user) {thisUser = user.id}
 
     useEffect (() => {
         fetch("/earings")
@@ -26,7 +29,7 @@ function NewListing({ user, addANewListing}) {
     function handleNewListing(e) {
         e.preventDefault()
         const newListing = {
-            user_id: thisUser,
+            user_id: user.id,
             earing_id: newListingEaringId,
             price: newPrice
         }
@@ -68,9 +71,7 @@ function NewListing({ user, addANewListing}) {
             if (r.ok) {
                 r.json()
                 .then((data) => {
-                    const earingList = earings
-                    earingList.push(data)
-                    setEarings(earingList)
+                    setEarings([...earings, data])
                     setErrors(["Succesfull!"])
                 })
             }

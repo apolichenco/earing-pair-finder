@@ -1,17 +1,22 @@
-import React, {useState, useEffect} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import { Route, Switch } from "react-router-dom"
 import Header from './Header'
 import LogIn from './LogIn'
 import Listings from './Listings'
-import Favorites from './Favorites'
+// import Favorites from './Favorites'
 import MyListings from './MyListings';
 import NewListing from './NewListing';
+import { UserContext } from '../context/user';
+// import '../App'
+import '../App.css';
 
 function App() {
 
     const [logInStatus, setLogInStatus] = useState("Sign In/Log In")
     const [allData, setAllData] = useState([])
-    const [user, setUser] = useState(false)
+    // const [user, setUser] = useState(false)
+
+    const {setUser} = useContext(UserContext)
 
     useEffect (() => {
       fetch("/listings")
@@ -36,9 +41,7 @@ function App() {
     }, [])
 
     function handleANewListing(newListing) {
-      const newList = allData
-      newList.push(newListing)
-      setAllData(newList)
+      setAllData([...allData, newListing])
     }
 
     function handleDeleteListing(listingId) {
@@ -47,22 +50,22 @@ function App() {
 
     function handleEditedListing(editedListing) {
       const listWithoutEdited = allData.map((listing) => {
-        if (listing.id !== editedListing.id) {
-          return listing
-        }
-        else {
-          return editedListing
-        }
+          if (listing.id !== editedListing.id) {
+            return listing
+          }
+          else {
+            return editedListing
+          }
         })
       setAllData(listWithoutEdited)
     }
 
   return (
     <div className="App">
-      <Header statusOfLogIn={logInStatus} onLogOut={setUser} setStatus={setLogInStatus}/>
+      <Header statusOfLogIn={logInStatus} setStatus={setLogInStatus}/>
       <Switch>
         <Route path="/log-in">
-          <LogIn setStatus={setLogInStatus} onLogIn={setUser}/>
+          <LogIn setStatus={setLogInStatus}/>
         </Route>
         <Route path="/listings">
           <Listings listingData={allData} />
@@ -74,7 +77,7 @@ function App() {
           <MyListings onDeleteListing={handleDeleteListing} onEditListing={handleEditedListing} />
         </Route>
         <Route path="/new-listing">
-          <NewListing addANewListing={handleANewListing} user={user} />
+          <NewListing addANewListing={handleANewListing} />
         </Route>
       </Switch>
     </div>

@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { UserContext } from '../context/user'
 
-function LogIn({setStatus, onLogIn}) {
+function LogIn({setStatus}) {
     const [name, setName] = useState("")
     const [password, setPassword] = useState("")
     const [errors, setErrors] = useState()
     const [typeOfLogIn, setTypeOfLogIn] = useState(true)
+
+    const {setUser} = useContext(UserContext)
 
     let allErrors = []
     if (errors) {
@@ -26,7 +29,7 @@ function LogIn({setStatus, onLogIn}) {
             if (r.ok) {
                 r.json().then((newUser) => {
                     setStatus(`Welcome ${newUser.name}`)
-                    onLogIn(newUser)
+                    setUser(newUser)
                     setErrors(["You are logged in!"])
                 })
             }
@@ -49,7 +52,7 @@ function LogIn({setStatus, onLogIn}) {
             if (r.ok) {
                 r.json().then((newUser) => {
                     setStatus(`Welcome ${newUser.name}`)
-                    onLogIn(newUser)
+                    setUser(newUser)
                     setErrors(["You are logged in!"])
                  })
             }

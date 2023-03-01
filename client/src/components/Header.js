@@ -11,21 +11,31 @@ function Header({onLogOut, statusOfLogIn, setStatus}) {
         })
     }
 
+    const navStyle = {
+        color: "white",
+        margin: 15,
+    }
+
     return (
-        <div>
-            <NavLink to="./log-in">
+        <div style={{        
+            position: 'fixed',
+            top: 0,
+            width: '100%',
+            background: 'black'
+            }}>
+            <NavLink to="./log-in" style={navStyle}>
                 {statusOfLogIn}     
             </NavLink>
-            <NavLink to="./listings">
+            <NavLink to="./listings" style={navStyle}>
                 Listings     
             </NavLink>
-            <NavLink to="./my-listings">
+            <NavLink to="./my-listings" style={navStyle}>
                 My Listings    
             </NavLink>
-            <NavLink to="./new-listing">
+            <NavLink to="./new-listing" style={navStyle}>
                 New Listing    
             </NavLink>
-            <a href="./log-in"><button onClick={deleteUser}>Log Out</button></a>
+            <a href="./log-in"><button onClick={deleteUser} style={{margin: 15}}>Log Out</button></a>
         </div>
     )
 }

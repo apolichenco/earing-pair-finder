@@ -26,5 +26,3 @@ A lot of people pwn a pair of earings, but what if you lose one of the earings, 
 ### Problems
 * Create a filter in all listings to show specific listings
 * The earings descriptions need to be more specific, but that's for when I have more time
-* Let you know if a signup, login, new listing, etc was succesful
-* Not change the order of the list when I edit a listing
