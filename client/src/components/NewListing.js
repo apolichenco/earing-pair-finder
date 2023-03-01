@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../context/user'
+import { ListingsContext } from '../context/listings'
 
 function NewListing({ addANewListing}) {
 
@@ -12,10 +13,7 @@ function NewListing({ addANewListing}) {
     const [earings, setEarings] = useState([])
 
     const {user} = useContext(UserContext)
-
-    
-    // let thisUser 
-    // if (user) {thisUser = user.id}
+    const {handleNewListing} = useContext(ListingsContext)
 
     useEffect (() => {
         fetch("/earings")
@@ -26,7 +24,7 @@ function NewListing({ addANewListing}) {
         })
       }, [])
 
-    function handleNewListing(e) {
+    function addANewListing(e) {
         e.preventDefault()
         const newListing = {
             user_id: user.id,
@@ -44,7 +42,7 @@ function NewListing({ addANewListing}) {
             if (r.ok) {
                 r.json()
                 .then((data) => {
-                    addANewListing(data)
+                    handleNewListing(data)
                     setErrors(["Succesfull!"])
                 })
             }
@@ -99,7 +97,7 @@ function NewListing({ addANewListing}) {
     }
 
     const newPriceForm =    <div>
-        <form onSubmit={handleNewListing}>
+        <form onSubmit={addANewListing}>
             <label>Choose an earing here:</label>
             <select onChange={(e) => setNewListingEaringId(e.target.value)}>
                 {earings.map((earing) => <option key={earing.id} value={earing.id}>{earing.color} and {earing.shape}</option>)}

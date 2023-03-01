@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import EditListing from './EditListing'
+import { ListingsContext } from "../context/listings";
+import { UserContext } from '../context/user';
 
-function MyListings({ onDeleteListing, onEditListing}) {
+function MyListings({}) {
 
-    const [loggedIn, setLoggedIn] = useState(false)
     const [myListingData, setMyListingData] = useState([])
     const [error, setError] = useState([])
+
+    const { handleDeleteListing, handleEditedListing} = useContext(ListingsContext)
+    const {user} = useContext(UserContext)
 
     useEffect (() => {
         fetch("/user-listings")
         .then((r) => {
             if (r.ok) {
                 r.json()
-                .then((data) => {
-                    setMyListingData(data)
-                    setLoggedIn(true)
-                })
+                .then((data) => setMyListingData(data))
             }
             else {
                 r.json().then((err) => setError(err.errors))
@@ -24,8 +25,8 @@ function MyListings({ onDeleteListing, onEditListing}) {
 
       }, [])
 
-      function handleEditedListing(editedListing) {
-        onEditListing(editedListing)
+      function editAListing(editedListing) {
+        handleEditedListing(editedListing)
         const listWithoutEdited = myListingData.map((listing) => {
           if (listing.id !== editedListing.id) {
             return listing
@@ -37,8 +38,8 @@ function MyListings({ onDeleteListing, onEditListing}) {
         setMyListingData(listWithoutEdited)
       }
 
-      function handleDeleteListing(listingId) {
-        onDeleteListing(listingId)
+      function deleteAListing(listingId) {
+        handleDeleteListing(listingId)
         setMyListingData(myListingData.filter((listing) => listing.id !== listingId))
       }
 
@@ -51,13 +52,13 @@ function MyListings({ onDeleteListing, onEditListing}) {
                         Styling: {listing.earing.shape}
                     </p>
                     <h3>Price: ${listing.price}</h3>
-                    <EditListing price={listing.price} id={listing.id} onEditLists={handleEditedListing} onDelete={handleDeleteListing}/>
+                    <EditListing price={listing.price} id={listing.id} onEditLists={editAListing} onDelete={deleteAListing}/>
                 </div>
             )})
 
     return (
         <div>
-            {loggedIn ? ifLoggedIn : <h5>{error}</h5>}
+            {user ? ifLoggedIn : <h5>{error}</h5>}
         </div>
     )
 }

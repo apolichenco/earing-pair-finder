@@ -3,26 +3,16 @@ import { Route, Switch } from "react-router-dom"
 import Header from './Header'
 import LogIn from './LogIn'
 import Listings from './Listings'
-// import Favorites from './Favorites'
 import MyListings from './MyListings';
 import NewListing from './NewListing';
 import { UserContext } from '../context/user';
-// import '../App'
 import '../App.css';
 
 function App() {
 
     const [logInStatus, setLogInStatus] = useState("Sign In/Log In")
-    const [allData, setAllData] = useState([])
-    // const [user, setUser] = useState(false)
 
-    const {setUser} = useContext(UserContext)
-
-    useEffect (() => {
-      fetch("/listings")
-      .then((r) => r.json())
-      .then((data) => setAllData(data))
-    }, [])
+    const {setUser} = useContext(UserContext) 
 
     useEffect (() => {
       fetch("/me")
@@ -40,26 +30,6 @@ function App() {
     })
     }, [])
 
-    function handleANewListing(newListing) {
-      setAllData([...allData, newListing])
-    }
-
-    function handleDeleteListing(listingId) {
-      setAllData(allData.filter((listing) => listing.id !== listingId))
-    }
-
-    function handleEditedListing(editedListing) {
-      const listWithoutEdited = allData.map((listing) => {
-          if (listing.id !== editedListing.id) {
-            return listing
-          }
-          else {
-            return editedListing
-          }
-        })
-      setAllData(listWithoutEdited)
-    }
-
   return (
     <div className="App">
       <Header statusOfLogIn={logInStatus} setStatus={setLogInStatus}/>
@@ -68,16 +38,13 @@ function App() {
           <LogIn setStatus={setLogInStatus}/>
         </Route>
         <Route path="/listings">
-          <Listings listingData={allData} />
+          <Listings/>
         </Route>
-        {/* <Route path="/favs">
-          <Favorites/>
-        </Route> */}
         <Route path="/my-listings">
-          <MyListings onDeleteListing={handleDeleteListing} onEditListing={handleEditedListing} />
+          <MyListings />
         </Route>
         <Route path="/new-listing">
-          <NewListing addANewListing={handleANewListing} />
+          <NewListing/>
         </Route>
       </Switch>
     </div>
