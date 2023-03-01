@@ -67,14 +67,14 @@ function App() {
         <Route path="/listings">
           <Listings listingData={allData} />
         </Route>
-        <Route path="/favs">
+        {/* <Route path="/favs">
           <Favorites/>
-        </Route>
+        </Route> */}
         <Route path="/my-listings">
-          <MyListings user={user} allData={allData} onDeleteListing={handleDeleteListing} onEditListing={handleEditedListing} />
+          <MyListings onDeleteListing={handleDeleteListing} onEditListing={handleEditedListing} />
         </Route>
         <Route path="/new-listing">
-          <NewListing allData={allData} addANewListing={handleANewListing} user={user} />
+          <NewListing addANewListing={handleANewListing} user={user} />
         </Route>
       </Switch>
     </div>

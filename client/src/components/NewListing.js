@@ -123,9 +123,18 @@ function NewListing({ user, addANewListing}) {
         <h5>Click <button onClick={goToNewPrice}>here</button> to add a price and make a new listing</h5>
     </div>
 
+    let form 
+    if (newEaringOrPrice) {
+        form = newPriceForm
+    }
+    else {
+        form = newEaringForm
+    }
+
     return (
         <div>
-            {newEaringOrPrice ? newPriceForm : newEaringForm}
+            {user ? form : <h5>You are not logged in</h5>}
+            
         </div>
     )
 }

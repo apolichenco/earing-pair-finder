@@ -51,7 +51,7 @@ function MyListings({ onDeleteListing, onEditListing}) {
 
     return (
         <div>
-            {loggedIn ? ifLoggedIn : error}
+            {loggedIn ? ifLoggedIn : <h5>{error}</h5>}
         </div>
     )
 }
