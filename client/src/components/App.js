@@ -54,7 +54,6 @@ function App() {
           return editedListing
         }
         })
-      // listWithoutEdited.push(editedListing)
       setAllData(listWithoutEdited)
     }
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-function NewListing({allData, user, addANewListing}) {
+function NewListing({ user, addANewListing}) {
 
     const [newPrice, setNewPrice] = useState()
     const [newColor, setNewColor] = useState()
@@ -82,12 +82,19 @@ function NewListing({allData, user, addANewListing}) {
 
     let allErrors = []
     if (errors) {
-        console.log(errors)
-        const objectErrors = Object.entries(errors)
-        allErrors = objectErrors.map((err, index) => {
+        allErrors = errors.map((err, index) => {
             return (<h5 key={index}>{err}</h5>)
         })
+    }
 
+    function goToNewPrice() {
+        setNewEaringOrPrice(true)
+        setErrors([])
+    }
+
+    function goToNewEaring() {
+        setNewEaringOrPrice(false)
+        setErrors([])
     }
 
     const newPriceForm =    <div>
@@ -96,7 +103,7 @@ function NewListing({allData, user, addANewListing}) {
             <select onChange={(e) => setNewListingEaringId(e.target.value)}>
                 {earings.map((earing) => <option key={earing.id} value={earing.id}>{earing.color} and {earing.shape}</option>)}
             </select>
-            <h5>Can't find the earing you're looking for? Click <button onClick={(e) => setNewEaringOrPrice(false)}>here</button> to create a new one!</h5>
+            <h5>Can't find the earing you're looking for? Click <button onClick={goToNewEaring}>here</button> to create a new one!</h5>
             <label>Price:</label>
             <input type="text" id="price" value={newPrice} onChange={(e) => setNewPrice(e.target.value)}></input>
             <button type="submit">Submit</button>
@@ -113,7 +120,7 @@ function NewListing({allData, user, addANewListing}) {
             <button type="submit">Submit</button>
         </form>
         {allErrors}
-        <h5>Click <button onClick={(e) => setNewEaringOrPrice(true)}>here</button> to add a price and make a new listing</h5>
+        <h5>Click <button onClick={goToNewPrice}>here</button> to add a price and make a new listing</h5>
     </div>
 
     return (

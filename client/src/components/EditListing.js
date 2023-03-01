@@ -30,12 +30,12 @@ function EditListing({price, id, onEditBigList, onEditMyList, onDelete}) {
         .then((r) => {
             if (r.ok) {
                 r.json()
-        .then((updatedListing) => {
-            onEditBigList(updatedListing)
-            onEditMyList(updatedListing)
-            setEditingStatus(true)
-            setErrors([])
-        })
+                .then((updatedListing) => {
+                    onEditBigList(updatedListing)
+                    onEditMyList(updatedListing)
+                    setEditingStatus(true)
+                    setErrors([])
+                })
             }
             else {
                 r.json().then((err) => setErrors(err.errors))
