@@ -23,7 +23,6 @@ class ListingsController < ApplicationController
     end
 
     def update
-        # authorize and make sure the user_id matches
         listing = Listing.find_by(id: params[:id])
         if listing.user.id == current_user_id 
             listing.update!(listing_params)
@@ -34,7 +33,6 @@ class ListingsController < ApplicationController
     end
 
     def destroy
-        # authorize and make sure the user_id matches
         listing = Listing.find(params[:id])
         if listing.user.id == current_user_id 
             listing.destroy

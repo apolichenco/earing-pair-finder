@@ -4,6 +4,9 @@ import { ListingsContext } from '../context/listings'
 
 function NewListing({ addANewListing}) {
 
+    const {user} = useContext(UserContext)
+    const {handleNewListing} = useContext(ListingsContext)
+
     const [newPrice, setNewPrice] = useState("")
     const [newColor, setNewColor] = useState("")
     const [newShape, setNewShape] = useState("")
@@ -11,9 +14,6 @@ function NewListing({ addANewListing}) {
     const [newListingEaringId, setNewListingEaringId] = useState(0)
     const [errors, setErrors] = useState([])
     const [earings, setEarings] = useState([])
-
-    const {user} = useContext(UserContext)
-    const {handleNewListing} = useContext(ListingsContext)
 
     useEffect (() => {
         fetch("/earings")

@@ -11,13 +11,6 @@ function Listings({}) {
             loadData()
         }, [])
 
-    function handleDelete(id) {
-            fetch(`/listings/${id}`, {
-                method: "DELETE",
-            })
-            handleDeleteListing(id)
-          }
-
     return (
         <div>
             {allListings.map((listing) => {
@@ -30,7 +23,7 @@ function Listings({}) {
                         Styling: {listing.earing.shape}
                     </p>
                     <h3>Price: ${listing.price}</h3>
-                    {user ? <button onClick={(e) => handleDelete(listing.id)}>Buy</button> : null}
+                    {user ? <button onClick={(e) => console.log(`I want to buy the ${listing.earing.color} and ${listing.earing.shape} earing for $${listing.price} from ${listing.user.name}.`)}>I want to buy this</button> : null}
                 </div>
                 )
             })}

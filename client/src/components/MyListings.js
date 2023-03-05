@@ -5,25 +5,16 @@ import { UserContext } from '../context/user';
 
 function MyListings({}) {
 
-    const [myListingData, setMyListingData] = useState([])
-    const [error, setError] = useState([])
-
     const { handleDeleteListing, handleEditedListing} = useContext(ListingsContext)
     const {user} = useContext(UserContext)
 
+    const [myListingData, setMyListingData] = useState([])
+    
     useEffect (() => {
-        fetch("/user-listings")
-        .then((r) => {
-            if (r.ok) {
-                r.json()
-                .then((data) => setMyListingData(data))
-            }
-            else {
-                r.json().then((err) => setError(err.errors))
-            }
-        })
-
-      }, [])
+      if (user) {
+        setMyListingData(user.listings)
+      }
+    }, [user])
 
       function editAListing(editedListing) {
         handleEditedListing(editedListing)
@@ -54,11 +45,12 @@ function MyListings({}) {
                     <h3>Price: ${listing.price}</h3>
                     <EditListing price={listing.price} id={listing.id} onEditLists={editAListing} onDelete={deleteAListing}/>
                 </div>
-            )})
+            )
+          })
 
     return (
         <div>
-            {user ? ifLoggedIn : <h5>{error}</h5>}
+            {user ? ifLoggedIn : <h5>You are not logged in</h5>}
         </div>
     )
 }
