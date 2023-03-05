@@ -9,7 +9,14 @@ function EditListing({price, id, onEditLists, onDelete}) {
         fetch(`/listings/${id}`, {
             method: "DELETE",
         })
-        onDelete(id)
+        .then((r) => {
+            if (r.ok) {
+                onDelete(id)
+            }
+            else {
+                r.json().then((err) => setErrors(err.errors))
+            }
+        })
       }
 
       function handleEdit() {

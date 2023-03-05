@@ -23,15 +23,25 @@ class ListingsController < ApplicationController
     end
 
     def update
+        # authorize and make sure the user_id matches
         listing = Listing.find_by(id: params[:id])
-        listing.update!(listing_params)
-        render json: listing, status: 202
+        if listing.user.id == current_user_id 
+            listing.update!(listing_params)
+            render json: listing, status: 202
+        else
+            render json: {errors: ["Not your listing"]}, status: :not_found
+        end
     end
 
     def destroy
+        # authorize and make sure the user_id matches
         listing = Listing.find(params[:id])
-        listing.destroy
-        head :no_content
+        if listing.user.id == current_user_id 
+            listing.destroy
+            head :no_content
+        else
+            render json: {errors: ["Not your listing"]}, status: :not_found
+        end
     end
 
     private
