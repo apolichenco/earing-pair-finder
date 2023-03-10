@@ -11,12 +11,6 @@ class ListingsController < ApplicationController
         render json: listings, status: :created
     end
 
-    def indexIndiv
-        user = User.find(session[:user_id])
-        listings = user.listings
-        render json: listings
-    end
-
     def create
         listing = Listing.create!(listing_params)
         render json: listing, status: :created

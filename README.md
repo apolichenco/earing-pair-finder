@@ -26,4 +26,4 @@ A lot of people pwn a pair of earings, but what if you lose one of the earings, 
 ### Problems
 * Create a filter in all listings to show specific listings
 * The earings descriptions need to be more specific, but that's for when I have more time
-<!-- take off fetch in my listing, get it when login and get user -->
+* Make a buy just a notification that message was sent
